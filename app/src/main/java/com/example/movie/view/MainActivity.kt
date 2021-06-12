@@ -11,6 +11,7 @@ import com.example.movie.domain.Movie
 import com.example.movie.view.ViewModel.MainViewModel
 import com.example.movie.view.ViewModel.ViewModelFactory
 import com.example.movie.view.adapter.MovieAdapter
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,7 +25,7 @@ private val viewModel by lazy {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
+        viewModel.getMovie()
         viewModel.movies.observe(this, Observer {
             loadRecycleView(it)
         })
