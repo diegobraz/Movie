@@ -1,6 +1,5 @@
-package com.example.movie.api.Repository.remote
+package com.example.movie.api
 
-import com.example.movie.domain.Movie
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

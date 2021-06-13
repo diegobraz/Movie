@@ -1,6 +1,6 @@
-package com.example.movie.api.Repository
+package com.example.movie.Repository.remote
 
-import com.example.movie.api.Repository.remote.MovieInstance
+import com.example.movie.api.MovieInstance
 import com.example.movie.domain.Movie
 
 class MovieRepositore {

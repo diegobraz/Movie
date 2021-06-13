@@ -10,7 +10,8 @@ import com.example.movie.domain.Movie
 import kotlinx.android.synthetic.main.movie_item.view.*
 
 class MovieAdapter(
-  val movies : List<Movie>
+  val movies : List<Movie>,
+  val onClickMovie: (movie:Movie) -> Any,
 ): RecyclerView.Adapter<MovieAdapter.Viewholder>(){
 
 
@@ -20,7 +21,10 @@ class MovieAdapter(
     }
 
     override fun onBindViewHolder(holder: Viewholder, position: Int) {
-        movies[position]?.let { holder.bindView(it) }
+        movies[position].let { holder.bindView(it) }
+        holder.itemView.movie_image.setOnClickListener {
+            onClickMovie(movies[position])
+        }
     }
 
     override fun getItemCount(): Int {
@@ -29,13 +33,12 @@ class MovieAdapter(
 
     class Viewholder(itemView : View ):RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(movie : Movie){
+        fun bindView(movie: Movie){
 
             itemView.title_movie.text = movie.title
             itemView.released.text = movie.released
             itemView.genre.text = movie.genre
             Glide.with(itemView.context).load(movie.poster).into(itemView.movie_image)
-
         }
 
     }

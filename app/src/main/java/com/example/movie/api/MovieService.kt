@@ -1,8 +1,6 @@
-package com.example.movie.api.Repository.remote
+package com.example.movie.api
 
 import com.example.movie.domain.Movie
-import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.GET
 
 

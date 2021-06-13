@@ -1,6 +1,8 @@
 package com.example.movie.view
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -36,8 +38,24 @@ private val viewModel by lazy {
         val recyclerView = findViewById<RecyclerView>(R.id.movie_list)
         recyclerView.post {
             recyclerView.layoutManager = LinearLayoutManager(this)
-            recyclerView.adapter = MovieAdapter(movie)
+            recyclerView.adapter = MovieAdapter(movie,onClickMovie = { movie ->
+                onCreateDetailMovie(movie)
+            })
 
         }
+    }
+
+    private fun onCreateDetailMovie(movie:Movie) {
+        startActivity(
+            Intent(
+                this,
+                MovieDetail::class.java
+            )
+        ).apply {
+            movie.poster
+            movie.title
+            movie.writer
+        }
+
     }
 }
