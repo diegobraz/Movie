@@ -1,5 +1,7 @@
 package com.example.movie.domain
 
+import java.io.Serializable
+
 data class Movie(
     val title :String,
     val year: String,
@@ -12,4 +14,4 @@ data class Movie(
     val actors : String,
     val plot : String,
     val poster: String
-    )
+): Serializable

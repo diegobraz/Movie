@@ -50,12 +50,9 @@ private val viewModel by lazy {
             Intent(
                 this,
                 MovieDetail::class.java
-            )
-        ).apply {
-            movie.poster
-            movie.title
-            movie.writer
-        }
+            ).apply {
+                putExtra("movie",movie)
+            }
+        ) }
 
-    }
 }
