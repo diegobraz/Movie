@@ -12,8 +12,8 @@ interface MovieDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
   suspend  fun save( movie : List<Movie>)
 
-    @Query("SELECT * FROM movie WHERE title = :movieSeach")
-    suspend fun get(movieSeach:String):Movie
+    @Query("SELECT * FROM movie WHERE title LIKE :movieSeach")
+    suspend fun get(movieSeach:String):List<Movie>
 
     @Query("SELECT * FROM movie")
     suspend fun selectAll():List<Movie>

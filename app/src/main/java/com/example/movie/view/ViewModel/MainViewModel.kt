@@ -1,6 +1,7 @@
 package com.example.movie.view.ViewModel
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -18,4 +19,10 @@ class MainViewModel(private val repositore: MovieRepositore): ViewModel() {
              movies.value = repositore.getPost(context)
          }
      }
+
+    fun seachMovie(movie:String, context: Context){
+        viewModelScope.launch {
+            movies.value = repositore.seachMovie(movie, context)
+        }
+    }
 }
