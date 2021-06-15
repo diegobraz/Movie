@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.R
+import com.example.movie.data.db.AppDataBase
 import com.example.movie.domain.Movie
 import com.example.movie.view.ViewModel.MainViewModel
 import com.example.movie.view.ViewModel.ViewModelFactory
@@ -27,7 +28,7 @@ private val viewModel by lazy {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel.getMovie()
+        viewModel.getMovie(this)
         viewModel.movies.observe(this, Observer {
             loadRecycleView(it)
         })

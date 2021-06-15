@@ -1,5 +1,6 @@
 package com.example.movie.view.ViewModel
 
+import android.content.Context
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,9 +13,9 @@ class MainViewModel(private val repositore: MovieRepositore): ViewModel() {
     var movies = MutableLiveData<List<Movie>>()
 
 
-    fun getMovie(){
+    fun getMovie(context: Context){
          viewModelScope.launch {
-             movies.value = repositore.getPost()
+             movies.value = repositore.getPost(context)
          }
      }
 }

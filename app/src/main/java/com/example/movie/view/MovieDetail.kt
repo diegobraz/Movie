@@ -2,13 +2,9 @@ package com.example.movie.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-
 import com.example.movie.R
 import com.example.movie.domain.Movie
-import com.example.movie.view.ViewModel.MainViewModel
-import com.example.movie.view.ViewModel.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
 class MovieDetail : AppCompatActivity() {
