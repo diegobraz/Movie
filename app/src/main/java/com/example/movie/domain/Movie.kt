@@ -17,5 +17,6 @@ data class Movie(
     val writer : String,
     val actors : String,
     val plot : String,
-    val poster: String
+    val poster: String,
+    var rating :Float
 ): Serializable

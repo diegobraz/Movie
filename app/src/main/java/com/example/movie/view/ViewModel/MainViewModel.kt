@@ -13,6 +13,8 @@ class MainViewModel(private val repositore: MovieRepositore): ViewModel() {
 
     var movies = MutableLiveData<List<Movie>>()
 
+    var click = MutableLiveData<Boolean>()
+
 
     fun getMovie(context: Context){
          viewModelScope.launch {
@@ -24,5 +26,19 @@ class MainViewModel(private val repositore: MovieRepositore): ViewModel() {
         viewModelScope.launch {
             movies.value = repositore.seachMovie(movie, context)
         }
+    }
+   fun rating(movie:Movie,rate : Float,context: Context){
+       viewModelScope.launch {
+           movie.rating = rate
+           repositore.SavePreference(context,movie)
+       }
+   }
+    fun selectTopMovie(context: Context){
+        viewModelScope.launch {
+            movies.value = repositore.topMovies(context)
+        }
+    }
+    fun setClick(value :Boolean){
+        click.value = value
     }
 }

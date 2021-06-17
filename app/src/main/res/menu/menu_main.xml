@@ -7,4 +7,10 @@
         app:showAsAction="ifRoom"
         app:actionViewClass="android.widget.SearchView"
         />
+    <item android:id="@+id/top_movie"
+        android:title="@string/top_movie"
+        android:icon="@drawable/ic_baseline_star_empyte"
+        app:showAsAction="ifRoom"
+        />
+
 </menu>
