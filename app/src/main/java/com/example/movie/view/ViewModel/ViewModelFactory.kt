@@ -1,10 +1,8 @@
 package com.example.movie.view.ViewModel
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.movie.Repository.remote.MovieRepositore
-import com.example.movie.data.db.AppDataBase
+import com.example.movie.Repository.MovieRepositore
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelFactory: ViewModelProvider.Factory {

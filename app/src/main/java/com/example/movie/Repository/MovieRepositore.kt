@@ -1,11 +1,8 @@
-package com.example.movie.Repository.remote
+package com.example.movie.Repository
 
 import android.content.Context
-import android.content.ContextWrapper
 import android.util.Log
-import android.widget.SearchView
 import com.example.movie.api.MovieInstance
-import com.example.movie.data.dao.MovieDao
 import com.example.movie.data.db.AppDataBase
 import com.example.movie.domain.Movie
 
@@ -18,6 +15,7 @@ class MovieRepositore(
         movieDao.save(movieApi)
         val localResposotire = movieDao.selectAll()
         return localResposotire
+
 
     }
 
@@ -39,7 +37,10 @@ class MovieRepositore(
 
     }
 
-
+    suspend fun localgetMovie(context: Context): List<Movie>{
+        val movieDao = AppDataBase.getDatabase(context = context).UserDao()
+        return movieDao.selectAll()
+    }
 
 
 }

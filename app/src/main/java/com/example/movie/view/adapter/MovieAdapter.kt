@@ -12,7 +12,6 @@ import com.example.movie.domain.Movie
 import kotlinx.android.synthetic.main.movie_item.view.*
 
 class MovieAdapter(
-//  val movies : List<Movie>,
   val onClickMovie: (movie:Movie) -> Any,
   val rating:(movie:Movie,rating:Float) -> Any
 ): RecyclerView.Adapter<MovieAdapter.Viewholder>(){
@@ -28,13 +27,10 @@ class MovieAdapter(
         holder.itemView.movie_image.setOnClickListener {
             onClickMovie(movies[position])
         }
-//        holder.itemView.rating_bar.onRatingBarChangeListener =
-//            RatingBar.OnRatingBarChangeListener { p0, p1, p2 ->
-//                rating(movies[position],p1)
-//            }
-        holder.itemView.rating_bar.setOnClickListener {
-            rating(movies[position],it.rating_bar.rating)
-        }
+        holder.itemView.rating_bar.onRatingBarChangeListener =
+            RatingBar.OnRatingBarChangeListener { p0, p1, p2 ->
+                rating(movies[position],p1)
+            }
 
     }
 
