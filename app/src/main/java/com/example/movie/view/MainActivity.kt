@@ -17,14 +17,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.R
-import com.example.movie.data.db.AppDataBase
 import com.example.movie.data.db.DataAplication
 import com.example.movie.domain.Movie
-import com.example.movie.util.ConnectionUtil
 import com.example.movie.view.ViewModel.MainViewModel
 import com.example.movie.view.ViewModel.ViewModelFactory
 import com.example.movie.view.adapter.MovieAdapter
-import retrofit2.Response
+
 
 class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
 
@@ -43,11 +41,7 @@ class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
             onClickMovie = { movie ->
                 onCreateDetailMovie(movie)
             },
-            rating = { movie, rating ->
-                Toast.makeText(this, "deu certo aqui ${rating}", Toast.LENGTH_SHORT).show()
-                viewModel.rating(movie,rating,this)
 
-            },
             favorite = { movie, status ->
                 viewModel.favorite(movie, status)
             }
@@ -68,14 +62,12 @@ class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
 
             if (info != null) {
                 if (info!!.state == NetworkInfo.State.CONNECTED) {
-                        Toast.makeText(context, "CONNECTED", Toast.LENGTH_LONG).show()
-                       viewModel.getMovie(this)
-//                        configRecycleView()
+
+                viewModel.getMovie()
                 }
             } else {
-                Toast.makeText(context, "NOT CONNECTED", Toast.LENGTH_LONG).show()
-                viewModel.getMovieLocal(this)
-//                configRecycleView()
+                viewModel.getMovieLocal()
+
 
             }
         }
@@ -112,20 +104,18 @@ class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.top_movie){
+        if (item.itemId == R.id.top_movie) {
 
-            if (!clickStar){
+            if (!clickStar) {
                 item.setIcon(R.drawable.ic_baseline_star_full)
-                viewModel.setClick(true)
                 clickStar = true
-                viewModel.selectTopMovie(this)
+                viewModel.selectTopMovie()
 
 
-            }else{
+            } else {
                 item.setIcon(R.drawable.ic_baseline_star_empyte)
-                  viewModel.setClick(false)
                 clickStar = false
-               conextion()
+                conextion()
             }
 
         }
@@ -136,25 +126,25 @@ class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
-        if (query != null && query !=" "){
+        if (query != null && query != " ") {
             seachDataBase(query)
-        }
-        else{
-            viewModel.getMovieLocal(this)
+        } else {
+            viewModel.getMovieLocal()
         }
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        if (newText != null && newText!= ""){
+        if (newText != null && newText != "") {
             seachDataBase(newText)
-        }else{
+        } else {
             conextion()
         }
         return true
     }
+
     private fun seachDataBase(movie:String){
-        viewModel.seachMovie(movie,this)
+        viewModel.seachMovie(movie)
     }
 
 

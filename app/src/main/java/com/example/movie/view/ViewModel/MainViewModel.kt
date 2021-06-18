@@ -12,32 +12,25 @@ class MainViewModel(private val repositore: MovieRepositore): ViewModel() {
 
     var movies = MutableLiveData<List<Movie>>()
 
-    var click = MutableLiveData<Boolean>()
-    var isConnected = MutableLiveData<Boolean>()
 
-    fun getMovie(context: Context){
+
+    fun getMovie(){
          viewModelScope.launch {
-             movies.value = repositore.getPost(context)
+             movies.value = repositore.getPost()
          }
      }
 
-    fun getMovieLocal(context: Context){
+    fun getMovieLocal(){
         viewModelScope.launch {
-            movies.value = repositore.localgetMovie(context)
+            movies.value = repositore.localgetMovie()
         }
     }
 
-    fun seachMovie(movie:String, context: Context){
+    fun seachMovie(movie:String){
         viewModelScope.launch {
-            movies.value = repositore.seachMovie(movie, context)
+            movies.value = repositore.seachMovie(movie)
         }
     }
-   fun rating(movie:Movie, rate : Float,context: Context){
-       viewModelScope.launch {
-           movie.rating = rate
-           repositore.SavePreference(movie)
-       }
-   }
 
     fun favorite(movie:Movie, status : Int){
         viewModelScope.launch {
@@ -45,18 +38,11 @@ class MainViewModel(private val repositore: MovieRepositore): ViewModel() {
             repositore.SavePreference(movie)
         }
     }
-    fun selectTopMovie(context: Context){
+    fun selectTopMovie(){
         viewModelScope.launch {
-            movies.value = repositore.topMovies(context)
+            movies.value = repositore.topMovies()
         }
     }
 
 
-    fun setClick(value :Boolean){
-        click.value = value
-    }
-
-    fun setStateConnect(status: Boolean) {
-        isConnected.postValue(status)
-    }
 }

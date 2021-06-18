@@ -4,8 +4,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object MovieInstance {
-//    https://private-b34167-rvmarvel.apiary-mock.com/saga
-
 
     private val retrofit by lazy {
 
