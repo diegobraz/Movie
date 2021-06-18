@@ -40,8 +40,22 @@
             android:layout_marginTop="8dp"
             android:numStars="5"
             android:stepSize="1"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/movie_image" />
+
+        <ImageView
+            android:id="@+id/favorite"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_best_no"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            app:layout_constraintTop_toTopOf="@+id/movie_image"
+            app:layout_constraintStart_toStartOf="@+id/movie_image"
+            app:layout_constraintEnd_toEndOf="@+id/movie_image"
+            app:layout_constraintHorizontal_bias="0" />
 
         <TextView
             android:id="@+id/title_movie"

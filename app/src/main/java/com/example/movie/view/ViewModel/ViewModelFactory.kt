@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.movie.Repository.MovieRepositore
 
 @Suppress("UNCHECKED_CAST")
-class ViewModelFactory: ViewModelProvider.Factory {
+class ViewModelFactory(private val repository: MovieRepositore): ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return MainViewModel(repositore = MovieRepositore()) as T
+        return MainViewModel(repositore = repository) as T
     }
 
 

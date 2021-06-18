@@ -18,7 +18,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.R
 import com.example.movie.data.db.AppDataBase
+import com.example.movie.data.db.DataAplication
 import com.example.movie.domain.Movie
+import com.example.movie.util.ConnectionUtil
 import com.example.movie.view.ViewModel.MainViewModel
 import com.example.movie.view.ViewModel.ViewModelFactory
 import com.example.movie.view.adapter.MovieAdapter
@@ -26,10 +28,10 @@ import retrofit2.Response
 
 class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
 
-private val viewModel by lazy {
-    ViewModelProvider(this,ViewModelFactory())
-        .get(MainViewModel::class.java)
-}
+    private val viewModel by lazy {
+        ViewModelProvider(this,ViewModelFactory((application as DataAplication).repository))
+            .get(MainViewModel::class.java)
+    }
     var clickStar = false
     var context = this
     var connectivity : ConnectivityManager? = null
@@ -44,12 +46,17 @@ private val viewModel by lazy {
             rating = { movie, rating ->
                 Toast.makeText(this, "deu certo aqui ${rating}", Toast.LENGTH_SHORT).show()
                 viewModel.rating(movie,rating,this)
+
+            },
+            favorite = { movie, status ->
+                viewModel.favorite(movie, status)
             }
         )
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        configRecycleView()
         conextion()
     }
 
@@ -63,12 +70,12 @@ private val viewModel by lazy {
                 if (info!!.state == NetworkInfo.State.CONNECTED) {
                         Toast.makeText(context, "CONNECTED", Toast.LENGTH_LONG).show()
                        viewModel.getMovie(this)
-                        configRecycleView()
+//                        configRecycleView()
                 }
             } else {
                 Toast.makeText(context, "NOT CONNECTED", Toast.LENGTH_LONG).show()
                 viewModel.getMovieLocal(this)
-                configRecycleView()
+//                configRecycleView()
 
             }
         }
@@ -134,7 +141,6 @@ private val viewModel by lazy {
         }
         else{
             viewModel.getMovieLocal(this)
-
         }
         return true
     }

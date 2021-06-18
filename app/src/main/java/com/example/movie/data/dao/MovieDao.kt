@@ -9,7 +9,7 @@ interface MovieDao {
    @Insert(onConflict = OnConflictStrategy.IGNORE)
   suspend  fun save( movie : List<Movie>)
 
-    @Query("SELECT * FROM movie WHERE title LIKE :movieSeach")
+    @Query("SELECT * FROM movie WHERE title LIKE '%' || :movieSeach || '%'")
     suspend fun get(movieSeach:String):List<Movie>
 
     @Query("SELECT * FROM movie")
@@ -17,6 +17,9 @@ interface MovieDao {
 
     @Query("SELECT * FROM movie ORDER BY rating DESC")
     suspend fun selctTopMovie():List<Movie>
+
+  @Query("SELECT * FROM movie ORDER BY favorite DESC")
+  suspend fun selctfavorite():List<Movie>
 
     @Update
     suspend fun savePreference(movie: Movie)
