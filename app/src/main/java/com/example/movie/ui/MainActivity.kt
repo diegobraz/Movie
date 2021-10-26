@@ -1,16 +1,13 @@
-package com.example.movie.view
+package com.example.movie.ui
 
-import android.app.Service
 import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,10 +16,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.R
 import com.example.movie.data.db.DataAplication
 import com.example.movie.domain.Movie
-import com.example.movie.view.ViewModel.MainViewModel
-import com.example.movie.view.ViewModel.ViewModelFactory
-import com.example.movie.view.adapter.MovieAdapter
-
+import com.example.movie.ui.viewModel.MainViewModel
+import com.example.movie.ui.viewModel.ViewModelFactory
+import com.example.movie.ui.adapter.MovieAdapter
 
 class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
@@ -92,11 +88,11 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
-        val item = menu.findItem(R.id.buscar_movie)
-        val seachView = item?.actionView as SearchView
         inflater.inflate(R.menu.menu_main, menu)
-        seachView.isSubmitButtonEnabled = true
-        seachView.setOnQueryTextListener(this)
+        val item = menu.findItem(R.id.buscar_movie)
+        val searchView = item?.actionView as SearchView
+        searchView.isSubmitButtonEnabled = true
+        searchView.setOnQueryTextListener(this)
         return true
     }
 
