@@ -10,26 +10,23 @@ class MovieRepositore(private val movieDao: MovieDao) {
     suspend fun getPost(): List<Movie> {
         val movieApi = MovieInstance.api.getPost()
         movieDao.save(movieApi)
-        val localResposotire = movieDao.selectAll()
-        return localResposotire
+        return movieDao.selectAll()
     }
 
     suspend fun seachMovie(movie: String): List<Movie> {
         return movieDao.get(movie)
     }
 
-    suspend fun SavePreference(movie : Movie){
-         movieDao.savePreference(movie)
+    suspend fun SavePreference(movie: Movie) {
+        movieDao.savePreference(movie)
     }
 
-    suspend fun topMovies():List<Movie>{
+    suspend fun topMovies(): List<Movie> {
         return movieDao.selctfavorite()
 
     }
 
-    suspend fun localgetMovie(): List<Movie>{
+    suspend fun localgetMovie(): List<Movie> {
         return movieDao.selectAll()
     }
-
-
 }

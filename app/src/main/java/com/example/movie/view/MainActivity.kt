@@ -24,29 +24,29 @@ import com.example.movie.view.ViewModel.ViewModelFactory
 import com.example.movie.view.adapter.MovieAdapter
 
 
-class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
+class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     private val viewModel by lazy {
-        ViewModelProvider(this,ViewModelFactory((application as DataAplication).repository))
+        ViewModelProvider(this, ViewModelFactory((application as DataAplication).repository))
             .get(MainViewModel::class.java)
     }
     var clickStar = false
     var context = this
-    var connectivity : ConnectivityManager? = null
-    var info : NetworkInfo? = null
+    var connectivity: ConnectivityManager? = null
+    var info: NetworkInfo? = null
 
 
-    val adapter by lazy {
+    private val adapter by lazy {
         MovieAdapter(
             onClickMovie = { movie ->
                 onCreateDetailMovie(movie)
             },
-
             favorite = { movie, status ->
                 viewModel.favorite(movie, status)
             }
         )
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
         conextion()
     }
 
-    private fun conextion(){
+    private fun conextion() {
         connectivity = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
 
         if (connectivity != null) {
@@ -63,17 +63,15 @@ class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
             if (info != null) {
                 if (info!!.state == NetworkInfo.State.CONNECTED) {
 
-                viewModel.getMovie()
+                    viewModel.getMovie()
                 }
             } else {
                 viewModel.getMovieLocal()
-
-
             }
         }
     }
 
-    private fun configRecycleView(){
+    private fun configRecycleView() {
         val recyclerView = findViewById<RecyclerView>(R.id.movie_list)
         recyclerView.post {
             recyclerView.layoutManager = LinearLayoutManager(this)
@@ -81,25 +79,24 @@ class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
         }
     }
 
-    private fun onCreateDetailMovie(movie:Movie) {
+    private fun onCreateDetailMovie(movie: Movie) {
         startActivity(
             Intent(
                 this,
                 MovieDetail::class.java
             ).apply {
-                putExtra("movie",movie)
+                putExtra("movie", movie)
             }
-        ) }
+        )
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val inflater: MenuInflater = menuInflater
-        inflater.inflate(R.menu.menu_main, menu)
         val item = menu.findItem(R.id.buscar_movie)
         val seachView = item?.actionView as SearchView
+        inflater.inflate(R.menu.menu_main, menu)
         seachView.isSubmitButtonEnabled = true
-
         seachView.setOnQueryTextListener(this)
-
         return true
     }
 
@@ -110,19 +107,13 @@ class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
                 item.setIcon(R.drawable.ic_baseline_star_full)
                 clickStar = true
                 viewModel.selectTopMovie()
-
-
             } else {
                 item.setIcon(R.drawable.ic_baseline_star_empyte)
                 clickStar = false
                 conextion()
             }
-
         }
-
-
         return true
-
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean {
@@ -143,19 +134,15 @@ class MainActivity : AppCompatActivity(),SearchView.OnQueryTextListener {
         return true
     }
 
-    private fun seachDataBase(movie:String){
+    private fun seachDataBase(movie: String) {
         viewModel.seachMovie(movie)
     }
 
-
     override fun onResume() {
         super.onResume()
-
         conextion()
         viewModel.movies.observe(this, Observer {
             adapter.setMovie(it)
         })
     }
-
-
 }

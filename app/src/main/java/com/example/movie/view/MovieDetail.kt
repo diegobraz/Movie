@@ -14,9 +14,7 @@ class MovieDetail : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
-
         movie = intent.getSerializableExtra("movie") as Movie
-
         loadMovie()
     }
 
@@ -24,7 +22,5 @@ class MovieDetail : AppCompatActivity() {
         Glide.with(this).load(movie.poster).into(movie_Image_detail)
         title_movie_deatil.text = movie.title
         description_movie_deatil.text  = movie.plot
-
     }
-
 }

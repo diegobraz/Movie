@@ -9,6 +9,4 @@ class ViewModelFactory(private val repository: MovieRepositore): ViewModelProvid
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         return MainViewModel(repositore = repository) as T
     }
-
-
 }

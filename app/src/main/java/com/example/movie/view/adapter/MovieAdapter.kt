@@ -12,37 +12,36 @@ import com.example.movie.domain.Movie
 import kotlinx.android.synthetic.main.movie_item.view.*
 
 class MovieAdapter(
-  val onClickMovie: (movie:Movie) -> Any,
-  val favorite:(movie:Movie, status:Int) -> Any
-): RecyclerView.Adapter<MovieAdapter.Viewholder>(){
+    val onClickMovie: (movie: Movie) -> Any,
+    val favorite: (movie: Movie, status: Int) -> Any
+) : RecyclerView.Adapter<MovieAdapter.Viewholder>() {
 
-    private var movies:List<Movie> = emptyList()
+    private var movies: List<Movie> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
         return Viewholder(view, onClickMovie, favorite)
     }
 
     override fun onBindViewHolder(holder: Viewholder, position: Int) {
         movies[position].let { holder.bindView(it) }
-
     }
 
     override fun getItemCount(): Int {
         return movies.size
     }
 
-    fun setMovie(list: List<Movie>){
+    fun setMovie(list: List<Movie>) {
         movies = list
         notifyDataSetChanged()
     }
 
     class Viewholder(
-        itemView : View,
-        val onClickMovie: (movie:Movie) -> Any,
-        val favorite:(movie:Movie, status:Int) -> Any
-    ):RecyclerView.ViewHolder(itemView) {
+        itemView: View,
+        val onClickMovie: (movie: Movie) -> Any,
+        val favorite: (movie: Movie, status: Int) -> Any
+    ) : RecyclerView.ViewHolder(itemView) {
 
-        fun bindView(movie: Movie){
+        fun bindView(movie: Movie) {
 
             itemView.title_movie.text = movie.title
             itemView.released.text = movie.released
@@ -57,9 +56,7 @@ class MovieAdapter(
             onClickListener(movie)
         }
 
-
-        private fun onClickListener(movie: Movie){
-
+        private fun onClickListener(movie: Movie) {
 
             itemView.movie_image.setOnClickListener {
                 onClickMovie(movie)
@@ -75,6 +72,5 @@ class MovieAdapter(
                 }
             }
         }
-
     }
 }
