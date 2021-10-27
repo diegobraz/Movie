@@ -21,6 +21,6 @@ class MovieDetail : AppCompatActivity() {
     private fun loadMovie() {
         Glide.with(this).load(movie.poster).into(movie_Image_detail)
         title_movie_deatil.text = movie.title
-        description_movie_deatil.text  = movie.plot
+        description_movie_deatil.text = movie.plot
     }
 }

@@ -71,10 +71,8 @@ class MainActivity : AppCompatActivity(),
 
     private fun configRecycleView() {
         val recyclerView = findViewById<RecyclerView>(R.id.movie_list)
-        recyclerView.post {
             recyclerView.layoutManager = LinearLayoutManager(this)
             recyclerView.adapter = adapter
-        }
     }
 
     private fun onCreateDetailMovie(movie: Movie) {
@@ -100,7 +98,6 @@ class MainActivity : AppCompatActivity(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.top_movie) {
-
             if (!clickStar) {
                 item.setIcon(R.drawable.ic_baseline_star_full)
                 clickStar = true

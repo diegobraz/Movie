@@ -1,7 +1,7 @@
 package com.example.movie.di
 
-import com.example.movie.Repository.MovieRepositore
-import com.example.movie.data.remoteDataSouce.MovieDataSouce
+import com.example.movie.repository.MovieRepositoryImpl
+import com.example.movie.data.boundary.MovieDataSouce
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,6 +15,6 @@ abstract class DataModule {
     @Singleton
     @Binds
     //todo mudar o nome
-    abstract fun provideMovieDataSource(dataSouce: MovieRepositore):MovieDataSouce
+    abstract fun provideMovieDataSource(dataSouce: MovieRepositoryImpl): MovieDataSouce
 
 }
