@@ -14,23 +14,23 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movie.R
-import com.example.movie.data.db.DataAplication
 import com.example.movie.domain.Movie
 import com.example.movie.ui.viewModel.MainViewModel
-import com.example.movie.ui.viewModel.ViewModelFactory
 import com.example.movie.ui.adapter.MovieAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
-class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
+@AndroidEntryPoint
+class MainActivity : AppCompatActivity(),
+    SearchView.OnQueryTextListener {
 
-    private val viewModel by lazy {
-        ViewModelProvider(this, ViewModelFactory((application as DataAplication).repository))
+    private val viewModel by lazy { ViewModelProvider(this)
             .get(MainViewModel::class.java)
     }
+
     var clickStar = false
     var context = this
     var connectivity: ConnectivityManager? = null
     var info: NetworkInfo? = null
-
 
     private val adapter by lazy {
         MovieAdapter(
@@ -46,11 +46,14 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        viewModel.movies.observe(this, {
+            adapter.setMovie(it)
+        })
         configRecycleView()
-        conextion()
+        connection()
     }
 
-    private fun conextion() {
+    private fun connection() {
         connectivity = context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
 
         if (connectivity != null) {
@@ -58,7 +61,6 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
             if (info != null) {
                 if (info!!.state == NetworkInfo.State.CONNECTED) {
-
                     viewModel.getMovie()
                 }
             } else {
@@ -106,7 +108,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
             } else {
                 item.setIcon(R.drawable.ic_baseline_star_empyte)
                 clickStar = false
-                conextion()
+                connection()
             }
         }
         return true
@@ -125,7 +127,7 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         if (newText != null && newText != "") {
             seachDataBase(newText)
         } else {
-            conextion()
+            connection()
         }
         return true
     }
@@ -136,9 +138,6 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
 
     override fun onResume() {
         super.onResume()
-        conextion()
-        viewModel.movies.observe(this, Observer {
-            adapter.setMovie(it)
-        })
+        connection()
     }
 }

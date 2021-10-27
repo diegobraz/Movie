@@ -1,32 +1,36 @@
 package com.example.movie.Repository
 
-
-import com.example.movie.api.MovieInstance
+import com.example.movie.api.MovieService
 import com.example.movie.data.dao.MovieDao
+import com.example.movie.data.remoteDataSouce.MovieDataSouce
 import com.example.movie.domain.Movie
+import javax.inject.Inject
 
-class MovieRepositore(private val movieDao: MovieDao) {
+class MovieRepositore  @Inject constructor(
+    private val movieDao: MovieDao,
+    private val movieService: MovieService
+    ) :MovieDataSouce {
 
-    suspend fun getPost(): List<Movie> {
-        val movieApi = MovieInstance.api.getPost()
+    override suspend fun getPost(): List<Movie> {
+        val movieApi = movieService.getPost()
         movieDao.save(movieApi)
         return movieDao.selectAll()
     }
 
-    suspend fun seachMovie(movie: String): List<Movie> {
+    override suspend fun seachMovie(movie: String): List<Movie> {
         return movieDao.get(movie)
     }
-
-    suspend fun SavePreference(movie: Movie) {
+    // todo refatorar o nome
+    override suspend fun SavePreference(movie: Movie) {
         movieDao.savePreference(movie)
     }
 
-    suspend fun topMovies(): List<Movie> {
+    override suspend fun topMovies(): List<Movie> {
         return movieDao.selctfavorite()
 
     }
-
-    suspend fun localgetMovie(): List<Movie> {
+    // todo refatorar o nome
+    override suspend fun localgetMovie(): List<Movie> {
         return movieDao.selectAll()
     }
 }

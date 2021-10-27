@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -17,6 +18,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField "String", "BASE_URL", "\"https://private-b34167-rvmarvel.apiary-mock.com/\""
     }
 
     buildTypes {
@@ -49,6 +51,9 @@ dependencies {
     //OKHttp
     implementation("com.squareup.okhttp3:okhttp:4.9.0")
 
+    // Http3
+    implementation("com.squareup.okhttp3:logging-interceptor:4.9.1")
+
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
 
@@ -64,6 +69,11 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation "androidx.room:room-ktx:$room_version"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:2.38.1"
+    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+    kapt "com.google.dagger:hilt-android-compiler:2.38.1"
 
     //teste
     testImplementation 'junit:junit:4.+'

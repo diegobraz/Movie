@@ -10,13 +10,16 @@ import com.example.movie.domain.Movie
 import kotlinx.android.synthetic.main.movie_item.view.*
 
 class MovieAdapter(
-    val onClickMovie: (movie: Movie) -> Any,
-    val favorite: (movie: Movie, status: Int) -> Any
+    val onClickMovie: (movie: Movie) -> Unit,
+    val favorite: (movie: Movie, status: Int) -> Unit
 ) : RecyclerView.Adapter<MovieAdapter.Viewholder>() {
 
     private var movies: List<Movie> = emptyList()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Viewholder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.movie_item, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.movie_item, parent,
+            false
+        )
         return Viewholder(view, onClickMovie, favorite)
     }
 

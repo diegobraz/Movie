@@ -4,10 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movie.Repository.MovieRepositore
+import com.example.movie.data.remoteDataSouce.MovieDataSouce
 import com.example.movie.domain.Movie
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel(private val repositore: MovieRepositore) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val repositore: MovieDataSouce) : ViewModel() {
 
     var movies = MutableLiveData<List<Movie>>()
 
