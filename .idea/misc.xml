@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/diego/AndroidStudioProjects/Movie/app/src/main/res/layout/activity_main.xml" value="0.14356884057971014" />
-        <entry key="..\:/Users/diego/AndroidStudioProjects/Movie/app/src/main/res/layout/activity_movie_detail.xml" value="0.1" />
-        <entry key="..\:/Users/diego/AndroidStudioProjects/Movie/app/src/main/res/layout/movie_item.xml" value="0.14356884057971014" />
+        <entry key="..\:/Users/diego/AndroidStudioProjects/Movie/app/src/main/res/drawable/ic_best_no.xml" value="0.1787037037037037" />
+        <entry key="..\:/Users/diego/AndroidStudioProjects/Movie/app/src/main/res/layout/activity_main.xml" value="0.12" />
+        <entry key="..\:/Users/diego/AndroidStudioProjects/Movie/app/src/main/res/layout/activity_movie_detail.xml" value="0.2" />
+        <entry key="..\:/Users/diego/AndroidStudioProjects/Movie/app/src/main/res/layout/activity_splah.xml" value="0.18704710144927536" />
+        <entry key="..\:/Users/diego/AndroidStudioProjects/Movie/app/src/main/res/layout/movie_item.xml" value="0.18" />
       </map>
     </option>
   </component>

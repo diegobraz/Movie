@@ -13,7 +13,7 @@ object DispatcherModule {
 
     @DefaultDispatcher
     @Provides
-    fun providerDefautDispatcher(): CoroutineDispatcher = Dispatchers.Default
+    fun providerDefaultDispatcher(): CoroutineDispatcher = Dispatchers.Default
 
     @IoDispatcher
     @Provides

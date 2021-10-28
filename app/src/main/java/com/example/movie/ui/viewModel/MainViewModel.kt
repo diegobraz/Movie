@@ -3,14 +3,14 @@ package com.example.movie.ui.viewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.movie.data.boundary.MovieDataSouce
+import com.example.movie.data.boundary.MovieDataSource
 import com.example.movie.domain.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val repository: MovieDataSouce) : ViewModel() {
+class MainViewModel @Inject constructor(private val repository: MovieDataSource) : ViewModel() {
 
     var movies = MutableLiveData<List<Movie>>()
 
@@ -26,7 +26,7 @@ class MainViewModel @Inject constructor(private val repository: MovieDataSouce) 
         }
     }
 
-    fun seachMovie(movie: String) {
+    fun searchMovie(movie: String) {
         viewModelScope.launch {
             movies.value = repository.searchMovie(movie)
         }

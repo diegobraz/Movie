@@ -9,7 +9,6 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.SearchView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,7 +22,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity(),
     SearchView.OnQueryTextListener {
 
-    private val viewModel by lazy { ViewModelProvider(this)
+    private val viewModel by lazy {
+        ViewModelProvider(this)
             .get(MainViewModel::class.java)
     }
 
@@ -71,8 +71,8 @@ class MainActivity : AppCompatActivity(),
 
     private fun configRecycleView() {
         val recyclerView = findViewById<RecyclerView>(R.id.movie_list)
-            recyclerView.layoutManager = LinearLayoutManager(this)
-            recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
     }
 
     private fun onCreateDetailMovie(movie: Movie) {
@@ -130,7 +130,7 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun seachDataBase(movie: String) {
-        viewModel.seachMovie(movie)
+        viewModel.searchMovie(movie)
     }
 
     override fun onResume() {

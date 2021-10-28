@@ -2,7 +2,7 @@ package com.example.movie.data.boundary
 
 import com.example.movie.domain.Movie
 
-interface MovieDataSouce {
+interface MovieDataSource {
     suspend fun getPost(): List<Movie>
     suspend fun searchMovie(movie: String): List<Movie>
     suspend fun savePreference(movie: Movie)
